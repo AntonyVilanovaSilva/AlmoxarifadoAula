@@ -1,0 +1,246 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>Categorias</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Descrição</th>
+        </tr>
+    </thead>
+    <tbody id="table">
+
+    </tbody>
+</table>
+
+<h1>Produtos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ProId</th>
+            <th scope="col">ProNome</th>
+            <th scope="col">ProImg</th>
+            <th scope="col">ProEstoque</th>
+           
+
+        </tr>
+    </thead>
+    <tbody id="tableProdutos">
+    </tbody>
+</table>
+
+<h1>Departamento</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">DepId</th>
+            <th scope="col">DepDescricao</th>
+            <th scope="col">DepSituacao</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody id="tableDepartamento">
+    </tbody>
+</table>
+
+<h1>Motivo</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">MotId</th>
+            <th scope="col">MotDescricao</th>
+            <th scope="col">CatId</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody id="tableDepartamento">
+    </tbody>
+</table>
+
+<script>
+    function teste() {
+        var url = window.location.href + "categorias"
+
+        var Table = document.getElementById('table')
+
+        fetch(url).then(response => {
+            return response.json();
+        }).then(data => {
+                console.log(data)
+            data.forEach((element) => {
+                Table.innerHTML += `
+                                  <tr>
+                                        <th scope="row">${element.catId}</th>
+                                        <td > ${element.catDescricao} </td>
+                                  </tr>`                 
+            })
+        })
+            
+    }
+
+    function teste2() {
+        var url = window.location.href + "produtos"
+
+        var Table = document.getElementById('table')
+
+        fetch(url).then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data)
+            data.forEach((element) => {
+                Table.innerHTML += `
+                                      <tr>
+                                                <th scope="row">${element.ProId}</th>
+                                                <td > ${element.ProNome} </td>
+                                                        <td > ${element.ProImg} </td>
+                                                            <td > ${element.ProEstoque} </td>
+                                                      
+                                      </tr>`
+            })
+        })
+
+    }
+
+    function teste3() {
+        var url = window.location.href + "departamentos"
+
+        var Table = document.getElementById('table')
+
+        fetch(url).then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data)
+            data.forEach((element) => {
+                Table.innerHTML += `
+                                          <tr>
+                                                            <th scope="row">${element.DepId}</th>
+                                                            <td > ${element.DepDescricao} </td>
+                                                                    <td > ${element.DepSituacao} </td>
+                                                                
+
+                                          </tr>`
+            })
+        })
+
+    }
+
+    function teste4() {
+        var url = window.location.href + "motivos"
+
+        var Table = document.getElementById('table')
+
+        fetch(url).then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data)
+            data.forEach((element) => {
+                Table.innerHTML += `
+                                          <tr>
+                                                            <th scope="row">${element.MotId}</th>
+                                                            <td > ${element.MotDescricao} </td>
+                                                                <td > ${element.CatId} </td>
+                                                                <
+
+                                          </tr>`
+            })
+        })
+
+    }
+
+    teste()
+    teste2()
+    teste3()
+    teste4()
+
+    function teste3() {
+        var url = window.location.href + "Departamento/Create"
+        var depDescricao = document.getElementById("depDescricao").value
+        var depSituacao = document.getElementById("depSituacao").value
+
+        if (depDescricao == "" || depSituacao == null) {
+            alert("Campos Vazios Verifique");
+            return
+        }
+
+        const data = {
+            motDescricao: motivoDescricao,
+            catiD: CatIdMotivo,
+        }
+
+        // Configurações da Requisição
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Tipo de conteúdo que está sendo enviada (JSON neste caso)
+            }
+                body: JSON.stringify(data) // Transforma os dados em formato JSON
+
+        }
+
+        // Faz a requisição usando fetch()
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar os dados');
+                }
+            })
+            .then(data => {
+                console.log('Dados recebidos:', data);
+                teste4()
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            })
+    }
+
+
+    function teste4() {
+        var url = window.location.href + "Motivo/Create"
+        var motivoDescricao = document.getElementById("MotDescricao").value
+        var CatIdMotivo = document.getElementById("CatIdMotivvo").ariaValueMax
+
+        if (motivoDescricao == "" || CatIdMotivo == ""  || parseInt(CatIdMotivo) == Number) {
+            alert("Campos Vazios Verifique");
+           return
+        }
+
+        const data = {
+            motDescricao: motivoDescricao,
+            catiD: CatIdMotivo,
+        }
+
+        // Configurações da Requisição
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Tipo de conteúdo que está sendo enviada (JSON neste caso)
+            }
+            body: JSON.stringify(data) // Transforma os dados em formato JSON
+
+        }
+
+        // Faz a requisição usando fetch()
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar os dados');
+                }
+            })
+            .then(data =>{
+                console.log('Dados recebidos:', data);
+                teste4()
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            })
+    }
+</script>
