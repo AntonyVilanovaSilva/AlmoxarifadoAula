@@ -161,6 +161,30 @@
     teste3()
     teste4()
 
+    function teste() {
+        var url = window.location.href + "Categoria/Create"
+        var CatDescricao = document.getElementById("CatDescricao").value
+
+        if (CatDescricao == "" ) {
+            alert("Campos Vazios Verifique");
+            return
+        }
+
+        const data = {
+            CatDescricao: CatDescricao,
+        }
+
+        // Configurações da Requisição
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Tipo de conteúdo que está sendo enviada (JSON neste caso)
+            }
+                    body: JSON.stringify(data) // Transforma os dados em formato JSON
+
+        }
+
+
     function teste3() {
         var url = window.location.href + "Departamento/Create"
         var depDescricao = document.getElementById("depDescricao").value
@@ -172,8 +196,7 @@
         }
 
         const data = {
-            motDescricao: motivoDescricao,
-            catiD: CatIdMotivo,
+            depSituacao: depSituacao,
         }
 
         // Configurações da Requisição
@@ -201,6 +224,7 @@
                 console.error('Erro:', error);
             })
     }
+
 
 
     function teste4() {
